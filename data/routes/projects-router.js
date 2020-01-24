@@ -18,20 +18,6 @@ router.get('/', (req, res) => {
     })
 });
 
-router.get('/:id/resources', (req, res) => {
-
-  projectsDb.getProjectResources()
-    .then(resources => {
-      res.status(200).json(resources);
-    })
-    .catch(err => {
-      res.status(500).json({
-        errorMessage: err.message,
-        stack: err.stack
-      });
-    })
-});
-
 router.get('/:id', (req, res) => {
   const { id } = req.params;
 
