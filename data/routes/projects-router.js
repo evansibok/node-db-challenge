@@ -18,6 +18,20 @@ router.get('/', (req, res) => {
     })
 });
 
+router.get('/:id/resources', (req, res) => {
+
+  projectsDb.getProjectResources()
+    .then(resources => {
+      res.status(200).json(resources);
+    })
+    .catch(err => {
+      res.status(500).json({
+        errorMessage: err.message,
+        stack: err.stack
+      });
+    })
+});
+
 router.get('/:id', (req, res) => {
   const { id } = req.params;
 
@@ -33,5 +47,34 @@ router.get('/:id', (req, res) => {
     })
 });
 
+router.post('/', (req, res) => {
+  const newProject = req.body;
+
+  projectsDb.addProject(newProject)
+    .then(data => {
+      res.status(201).json(data);
+    })
+    .catch(err => {
+      res.status(500).json({
+        errorMessage: err.message,
+        stack: err.stack
+      });
+    })
+});
+
+router.delete('/:id', (req, res) => {
+  const { id } = req.params;
+
+  projectsDb.deleteProject(id)
+    .then(data => {
+      res.status(202).json(data);
+    })
+    .catch(err => {
+      res.status(500).json({
+        errorMessage: err.message,
+        stack: err.stack
+      });
+    })
+});
 
 module.exports = router;

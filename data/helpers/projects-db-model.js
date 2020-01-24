@@ -10,7 +10,20 @@ function getProjectById(id) {
     .first();
 }
 
+function addProject(newProject) {
+  return db('projects')
+    .insert(newProject)
+}
+
+function deleteProject(id) {
+  return db('projects')
+    .where({ id })
+    .del()
+}
+
 module.exports = {
   getAllProjects,
-  getProjectById
+  getProjectById,
+  addProject,
+  deleteProject
 }
