@@ -4,10 +4,10 @@ function getAllProjects() {
   return db('projects');
 }
 
-function getProjectById(id) {
-  return db('projects')
-    .where({ id })
-    .first();
+function getProjectById(project_id) {
+  return db('projects as p')
+    .where({ project_id })
+    .leftJoin('tasks as t', 't.project_id', 'p.id')
 }
 
 function addProject(newProject) {
