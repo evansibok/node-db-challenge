@@ -18,5 +18,20 @@ router.get('/', (req, res) => {
     })
 });
 
+router.get('/:id', (req, res) => {
+  const { id } = req.params;
+
+  projectsDb.getProjectById(id)
+    .then(project => {
+      res.status(200).json(project);
+    })
+    .catch(err => {
+      res.status(500).json({
+        errorMessage: err.message,
+        stack: err.stack
+      });
+    })
+});
+
 
 module.exports = router;
