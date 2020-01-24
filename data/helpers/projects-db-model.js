@@ -5,9 +5,8 @@ function getAllProjects() {
 }
 
 function getProjectById(project_id) {
-  return db('projects as p')
+  return db('projects')
     .where({ project_id })
-    .leftJoin('tasks as t', 't.project_id', 'p.id')
 }
 
 function addProject(newProject) {
