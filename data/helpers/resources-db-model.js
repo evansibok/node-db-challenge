@@ -4,6 +4,12 @@ function getAllResources() {
   return db('resources');
 }
 
+function addResource(newResource) {
+  return db('resources')
+    .insert(newResource);
+}
+
 module.exports = {
-  getAllResources
+  getAllResources,
+  addResource
 }

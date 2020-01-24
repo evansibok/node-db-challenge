@@ -18,4 +18,19 @@ router.get('/', (req, res) => {
     })
 });
 
+router.post('/', (req, res) => {
+  const newResource = req.body;
+
+  resourcesDb.addResource(newResource)
+    .then(resourceId => {
+      res.status(201).json(resourceId);
+    })
+    .catch(err => {
+      res.status(500).json({
+        errorMessage: err.message,
+        stack: err.stack
+      });
+    })
+});
+
 module.exports = router;
